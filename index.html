@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
@@ -20,9 +21,9 @@ h1{font-size:clamp(26px,6vw,44px);margin:18px 0 4px;font-weight:900;color:var(--
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:16px 0}
 .card h2{margin:0 0 8px;font-size:18px;color:var(--gold)}
 label{display:block;font-weight:700;margin:10px 0 6px}
-select,textarea{width:100%;background:var(--code);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:10px;font:14px/1.5 ui-monospace,Consolas,monospace}
+select,textarea,input{width:100%;background:var(--code);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:10px;font:14px/1.5 ui-monospace,Consolas,monospace}
 textarea{min-height:170px;resize:vertical;direction:ltr;text-align:left}
-select{font-family:inherit;font-size:15px}
+select,input{font-family:inherit;font-size:15px}
 .btn{background:var(--acc);color:#fff;border:0;border-radius:10px;padding:11px 22px;font:700 16px Cairo,sans-serif;cursor:pointer;margin-top:12px}
 .btn:disabled{opacity:.5;cursor:wait}
 .btn.ghost{background:none;color:var(--mut);border:1px solid var(--line)}
@@ -34,6 +35,7 @@ ul{margin:6px 0;padding-inline-start:22px}
 .ok{color:var(--ok);font-weight:700}.bad{color:var(--acc);font-weight:700}
 .hide{display:none}
 footer{text-align:center;color:var(--mut);font-size:13px;margin-top:30px}
+.api-box{margin-bottom:15px;background:var(--code);padding:12px;border-radius:10px;border:1px solid var(--line)}
 </style>
 </head>
 <body>
@@ -41,6 +43,13 @@ footer{text-align:center;color:var(--mut);font-size:13px;margin-top:30px}
 <header><span style="font-size:34px">⚖️</span><button class="tog" id="tg">English</button></header>
 <h1 data-i="title"></h1>
 <p class="sub" data-i="sub"></p>
+
+<section class="card">
+<div class="api-box">
+<label for="apikey" data-i="api_label">مفتاح Gemini API:</label>
+<input type="password" id="apikey" placeholder="أدخل مفتاح الـ API هنا (AIzaSy...)">
+</div>
+</section>
 
 <section class="card" id="in">
 <h2 data-i="h_def"></h2>
@@ -76,8 +85,8 @@ footer{text-align:center;color:var(--mut);font-size:13px;margin-top:30px}
 
 <script>
 const T={
-ar:{title:"محكمة الأكواد الملعونة",sub:"الصق كودك المكسور… واستعد للمحاكمة. الحكم النهائي لا يُفتح إلا بعد أداء العقوبة.",h_def:"المتهم",lang:"لغة البرمجة",code:"الكود المتهم",ph:"الصق الكود المليء بالأخطاء هنا…",go:"استدعِ القاضي",h_v:"حكم المحكمة",h_p:"العقوبة البرمجية",ph2:"اكتب كود العقوبة هنا…",pay:"أنفّذ العقوبة",h_s:"الحل الصحيح",locked:"الحل مقفل حتى تنفّذ العقوبة.",free:"تم العفو عنك. هذا هو الحل:",again:"قضية جديدة",foot:"محكمة الأكواد الملعونة · يُحاكَم الكود وليس صاحبه 😉",judging:"القاضي يراجع القضية…",verifying:"القاضي يفحص عقوبتك…",empty:"الصق الكود أولاً.",fail:"تعذّر الاتصال بالقاضي. حاول مرة أخرى.",nocap:"ميزة الذكاء الاصطناعي غير متاحة في هذا العرض.",lang_out:"Arabic",charges:"التهم"},
-en:{title:"The Cursed Code Court",sub:"Paste your broken code… and brace for trial. The final fix stays locked until you serve your penance.",h_def:"The Defendant",lang:"Programming language",code:"The accused code",ph:"Paste your buggy code here…",go:"Summon the Judge",h_v:"The Verdict",h_p:"Your Penance",ph2:"Write your penance code here…",pay:"Serve the penance",h_s:"The Correct Fix",locked:"The fix is locked until you serve your penance.",free:"You are pardoned. Here is the fix:",again:"New case",foot:"The Cursed Code Court · the code is on trial, not you 😉",judging:"The judge is reviewing the case…",verifying:"The judge is inspecting your penance…",empty:"Paste some code first.",fail:"Couldn’t reach the judge. Try again.",nocap:"AI is unavailable in this view.",lang_out:"English",charges:"Charges"}
+ar:{title:"محكمة الأكواد الملعونة",sub:"الصق كودك المكسور… واستعد للمحاكمة. الحكم النهائي لا يُفتح إلا بعد أداء العقوبة.",h_def:"المتهم",lang:"لغة البرمجة",code:"الكود المتهم",ph:"الصق الكود المليء بالأخطاء هنا…",go:"استدعِ القاضي",h_v:"حكم المحكمة",h_p:"العقوبة البرمجية",ph2:"اكتب كود العقوبة هنا…",pay:"أنفّذ العقوبة",h_s:"الحل الصحيح",locked:"الحل مقفل حتى تنفّذ العقوبة.",free:"تم العفو عنك. هذا هو الحل:",again:"قضية جديدة",foot:"محكمة الأكواد الملعونة · يُحاكَم الكود وليس صاحبه 😉",judging:"القاضي يراجع القضية…",verifying:"القاضي يفحص عقوبتك…",empty:"الصق الكود أولاً.",nofey:"الرجاء إدخال مفتاح Gemini API أولاً.",fail:"تعذّر الاتصال بالقاضي. حاول مرة أخرى.",lang_out:"Arabic",charges:"التهم",api_label:"مفتاح Google Gemini API:"},
+en:{title:"The Cursed Code Court",sub:"Paste your broken code… and brace for trial. The final fix stays locked until you serve your penance.",h_def:"The Defendant",lang:"Programming language",code:"The accused code",ph:"Paste your buggy code here…",go:"Summon the Judge",h_v:"The Verdict",h_p:"Your Penance",ph2:"Write your penance code here…",pay:"Serve the penance",h_s:"The Correct Fix",locked:"The fix is locked until you serve your penance.",free:"You are pardoned. Here is the fix:",again:"New case",foot:"The Cursed Code Court · the code is on trial, not you 😉",judging:"The judge is reviewing the case…",verifying:"The judge is inspecting your penance…",empty:"Paste some code first.",nofey:"Please enter your Gemini API key first.",fail:"Couldn’t reach the judge. Try again.",lang_out:"English",charges:"Charges",api_label:"Google Gemini API Key:"}
 };
 let L=(navigator.language||"").startsWith("ar")?"ar":"en",C=null;
 const $=i=>document.getElementById(i);
@@ -86,56 +95,75 @@ document.querySelectorAll("[data-i]").forEach(e=>e.textContent=T[l][e.dataset.i]
 document.querySelectorAll("[data-p]").forEach(e=>e.placeholder=T[l][e.dataset.p]);
 $("tg").textContent=l=="ar"?"English":"العربية"}
 $("tg").onclick=()=>setLang(L=="ar"?"en":"ar");
+
 async function ask(p){
- const s=await (window.claude&&claude.use("sample"));
- if(!s)throw{code:"nocap"};
- const r=await s(p,{cache:false});
- return r.text;
+    const key = $("apikey").value.trim();
+    if(!key) throw {code: "nofey"};
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contents: [{ parts: [{ text: p }] }] })
+    });
+    const data = await res.json();
+    if (data.candidates && data.candidates[0].content) {
+        return data.candidates[0].content.parts[0].text;
+    } else {
+        throw new Error("API Error");
+    }
 }
-function parse(t){const m=t.match(/\{[\s\S]*\}/);return JSON.parse(m[0])}
+
+function parse(t){
+    const m = t.match(/\{[\s\S]*\}/);
+    if(!m) throw new Error("Invalid JSON");
+    return JSON.parse(m[0]);
+}
+
 function err(m){const e=$("err");e.textContent=m;e.classList.toggle("hide",!m)}
+
 $("go").onclick=async()=>{
- const code=$("code").value.trim();err("");
- if(!code){err(T[L].empty);return}
- const b=$("go");b.disabled=true;b.textContent=T[L].judging;
- const p=`You are "The Cursed Code Judge": a ruthless, theatrical, sarcastic cyber-judge presiding over a courtroom for bad code. Write every text field in ${T[L].lang_out}. Roast the CODE, never the person. The code language is ${$("lg").value}.
+    const code=$("code").value.trim();err("");
+    if(!code){err(T[L].empty);return}
+    const b=$("go");b.disabled=true;b.textContent=T[L].judging;
+    const p=`You are "The Cursed Code Judge": a ruthless, theatrical, sarcastic cyber-judge presiding over a courtroom for bad code. Write every text field in ${T[L].lang_out}. Roast the CODE, never the person. The code language is ${$("lg").value}.
 Code:
 ${code}
 
-Return ONLY a JSON object (no markdown fences) with keys:
+Return ONLY a JSON object (no markdown fences or extra text) with keys:
 "verdict": 2-4 savage but witty sentences mocking the code,
 "charges": array of short strings, one per real bug or bad practice found,
 "sentence": one dramatic sentence of ruling,
 "penance": a small concrete coding task (2-5 lines of code, any language) themed on the defendant's sin, e.g. print a confession sentence 10 times,
 "fixed_code": the full corrected code,
 "explanation": a short explanation of what was fixed.`;
- try{
-  C=parse(await ask(p));
-  $("vd").textContent=C.verdict;$("sn").textContent=C.sentence;
-  const ul=$("ch");ul.textContent="";(C.charges||[]).forEach(c=>{const li=document.createElement("li");li.textContent=c;ul.appendChild(li)});
-  $("pt").textContent=C.penance;$("pc").value="";$("pr").classList.add("hide");
-  $("lk").classList.remove("hide");$("sol").classList.add("hide");
-  $("fx").textContent="";$("ex").textContent="";
-  $("out").classList.remove("hide");$("out").scrollIntoView({behavior:"smooth"});
- }catch(e){err(e&&e.code=="nocap"?T[L].nocap:T[L].fail)}
- b.disabled=false;b.textContent=T[L].go;
+    try{
+     C=parse(await ask(p));
+     $("vd").textContent=C.verdict;$("sn").textContent=C.sentence;
+     const ul=$("ch");ul.textContent="";(C.charges||[]).forEach(c=>{const li=document.createElement("li");li.textContent=c;ul.appendChild(li)});
+     $("pt").textContent=C.penance;$("pc").value="";$("pr").classList.add("hide");
+     $("lk").classList.remove("hide");$("sol").classList.add("hide");
+     $("fx").textContent="";$("ex").textContent="";
+     $("out").classList.remove("hide");$("out").scrollIntoView({behavior:"smooth"});
+    }catch(e){err(e&&e.code=="nofey"?T[L].nofey:T[L].fail)}
+    b.disabled=false;b.textContent=T[L].go;
 };
+
 $("pb").onclick=async()=>{
- const sub=$("pc").value.trim();if(!sub||!C)return;
- const b=$("pb"),r=$("pr");b.disabled=true;b.textContent=T[L].verifying;
- const p=`You are a strict but fair, sarcastic code judge. Penance task: "${C.penance}"
+    const sub=$("pc").value.trim();if(!sub||!C)return;
+    const b=$("pb"),r=$("pr");b.disabled=true;b.textContent=T[L].verifying;
+    const p=`You are a strict but fair, sarcastic code judge. Penance task: "${C.penance}"
 Submitted code:
 ${sub}
 
-Decide whether the submitted code correctly does what the task asks (any language is fine, judge syntax and logic). Return ONLY JSON, no fences: {"ok": true or false, "comment": "one short sarcastic sentence in ${T[L].lang_out}"}`;
- try{
-  const v=parse(await ask(p));
-  r.textContent=v.comment;r.className=v.ok?"ok":"bad";
-  if(v.ok){$("fx").textContent=C.fixed_code;$("ex").textContent=C.explanation;
-   $("lk").classList.add("hide");$("sol").classList.remove("hide")}
- }catch(e){r.textContent=T[L].fail;r.className="bad"}
- b.disabled=false;b.textContent=T[L].pay;
+Decide whether the submitted code correctly does what the task asks (any language is fine, judge syntax and logic). Return ONLY JSON, no markdown fences: {"ok": true or false, "comment": "one short sarcastic sentence in ${T[L].lang_out}"}`;
+    try{
+     const v=parse(await ask(p));
+     r.textContent=v.comment;r.className=v.ok?"ok":"bad";
+     if(v.ok){$("fx").textContent=C.fixed_code;$("ex").textContent=C.explanation;
+      $("lk").classList.add("hide");$("sol").classList.remove("hide")}
+    }catch(e){r.textContent=T[L].fail;r.className="bad"}
+    b.disabled=false;b.textContent=T[L].pay;
 };
+
 $("nw").onclick=()=>{C=null;$("out").classList.add("hide");$("code").value="";window.scrollTo({top:0,behavior:"smooth"})};
 setLang(L);
 </script>
