@@ -85,7 +85,7 @@ footer{text-align:center;color:var(--mut);font-size:13px;margin-top:30px}
 <script>
 const T={
 ar:{title:"محكمة الأكواد الملعونة",sub:"الصق كودك المكسور… واستعد للمحاكمة. الحكم النهائي لا يُفتح إلا بعد أداء العقوبة.",h_def:"المتهم",lang:"لغة البرمجة",code:"الكود المتهم",ph:"الصق الكود المليء بالأخطاء هنا…",go:"استدعِ القاضي",h_v:"حكم المحكمة",h_p:"العقوبة البرمجية",ph2:"اكتب كود العقوبة هنا…",pay:"أنفّذ العقوبة",h_s:"الحل الصحيح",locked:"الحل مقفل حتى تنفّذ العقوبة.",free:"تم العفو عنك. هذا هو الحل:",again:"قضية جديدة",foot:"محكمة الأكواد الملعونة · يُحاكَم الكود وليس صاحبه 😉",judging:"القاضي يراجع القضية…",verifying:"القاضي يفحص عقوبتك…",empty:"الصق الكود أولاً.",nofey:"الرجاء إدخال مفتاح Gemini API أولاً.",fail:"تعذّر الاتصال بالقاضي. حاول مرة أخرى.",lang_out:"Arabic",charges:"التهم",api_label:"مفتاح Google Gemini API:"},
-en:{title:"The Cursed Code Court",sub:"Paste your broken code… and brace for trial. The final fix stays locked until you serve your penance.",h_def:"The Defendant",lang:"Programming language",code:"The accused code",ph:"Paste your buggy code here…",go:"Summon the Judge",h_v:"The Verdict",h_p:"Your Penance",ph2:"Write your penance code here…",pay:"Serve the penance",h_s:"The Correct Fix",locked:"The fix is locked until you serve your penance.",free:"You are pardoned. Here is the fix:",again:"New case",foot:"The Cursed Code Court – the code is on trial, not you 😉",judging:"The judge is reviewing the case…",verifying:"The judge is inspecting your penance…",empty:"Paste some code first.",nofey:"Please enter your Gemini API key first.",fail:"Couldn’t reach the judge. Try again.",lang_out:"English",charges:"Charges",api_label:"Google Gemini API Key:"}
+en:{title:"The Cursed Code Court",sub:"Paste your broken code… and brace for trial. The final fix stays locked until you serve your penance.",h_def:"The Defendant",lang:"Programming language",code:"The accused code",ph:"Paste your buggy code here…",go:"Summon the Judge",h_v:"The Verdict",h_p:"Your Penance",ph2:"Write your penance code here…",pay:"Serve the penance",h_s:"The Correct Fix",locked:"The fix is locked until you serve your penance.",free:"You are pardoned. Here is the fix:",again:"New case",foot:"The Cursed Code Court · the code is on trial, not you 😉",judging:"The judge is reviewing the case…",verifying:"The judge is inspecting your penance…",empty:"Paste some code first.",nofey:"Please enter your Gemini API key first.",fail:"Couldn’t reach the judge. Try again.",lang_out:"English",charges:"Charges",api_label:"Google Gemini API Key:"}
 };
 let L=(navigator.language||"").startsWith("ar")?"ar":"en",C=null;
 const $=i=>document.getElementById(i);
@@ -98,8 +98,8 @@ $("tg").onclick=()=>setLang(L=="ar"?"en":"ar");
 async function ask(p){
     const key = $("apikey").value.trim();
     if(!key) throw {code: "nofey"};
-    // تم تحديث اسم النموذج هنا إلى gemini-3.8-flash بناءً على طلب Google API
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${key}`, {
+    // استخدام gemini-1.5-flash كنموذج مستقر ومعتمد
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ contents: [{ parts: [{ text: p }] }] })
