@@ -6,7 +6,7 @@ app = Flask(__name__)
 CORS(app) # للسماح للواجهة بالتواصل مع الخادم
 
 # ضع مفتاح API الخاص بك هنا للاختبار المحلي فقط
-genai.configure(api_key="ْyour API key")
+genai.configure(api_key="AQ.Ab8RN6IYQG5RCxv3jyGFBC6f1Y6n5ewVLhprzxoojgi6WYLLIw")
 model = genai.GenerativeModel('gemini-2.5-flash')
 
 @app.route('/api/judge', methods=['POST'])
